@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<p id="demo"></p>
+  <h1>Profile <small> Welcome {{session.name}}</small></h1>
+  <hr>
+
+<div id="userInfo">
+  <h3>{{session.name}}</h3>
+  <h3>{{session.email}}</h3>
+  <h3>{{session.username}}</h3>
+</div>
+<button type="button" id="editBtn">Edit</button>
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form id="userEdit" method="POST" action="" >
+    <div class="form-group">
+      {{render_field(form.name, class_="form-control", value= session.name )}}
+    </div>
+    <div class="form-group">
+      {{render_field(form.email, class_="form-control", value= session.email)}}
+    </div>
+    <div class="form-group">
+      {{render_field(form.username, class_="form-control", value= session.username)}}
+    </div>
+    <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+  </form>
+<button id="changeP" class="btn btn-primary"  type="button" onclick="location.href='/password'">Change Password</button>
+<button id="cancel" class="btn btn-primary"  type="button" > Cancel</button>
+<script>
+var name = {{session.name|tojson}};
+var email = {{session.email|tojson}};
+var username = {{session.username|tojson}};
+document.getElementById("userEdit").style.visibility = "hidden";
+document.getElementById("cancel").style.visibility = "hidden";
+document.getElementById("changeP").style.visibility = "hidden";
+var html = '<h3>';
+html += name;
+html += '</h3>';
+html += '<h3>';
+html += email;
+html += '</h3>';
+html += '<h3>';
+html += username;
+html += '</h3>';
+
+
+
+
+
+document.getElementById("editBtn").addEventListener("click", function() {
+  document.getElementById("userInfo").style.visibility = "hidden";
+  document.getElementById("editBtn").style.visibility = "hidden";
+  document.getElementById("cancel").style.visibility = "visible";
+  document.getElementById("changeP").style.visibility = "visible";
+  document.getElementById("userEdit").style.visibility = "visible";
+  document.getElementById("name").value = name;
+  document.getElementById("email").value = email;
+  document.getElementById("username").value = username;
+  document.getElementById("userInfo").innerHTML = " ";
+});
+
+document.getElementById("cancel").addEventListener("click", function() {
+  document.getElementById("editBtn").style.visibility = "visible";
+  document.getElementById("userInfo").style.visibility = "visible";
+   document.getElementById("cancel").style.visibility = "hidden";
+   document.getElementById("changeP").style.visibility = "hidden";
+  document.getElementById("userEdit").style.visibility = "hidden";
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("username").value = "";
+   document.getElementById("userInfo").innerHTML = html;
+});
+
+</script>
+{% endblock %}

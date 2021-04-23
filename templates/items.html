@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <!--Search Bar-->
+    <form action="", method="POST">
+        <input style="background-color: lightgray; width: 70%;" type="text" placeholder="Search" name="searchbar">
+        <button style="background-color: lightgreen", name="submit_search", value="submit_search", type="submit">Search</button>
+    </form>
+    {% if searchTerm %}
+        <!--Display the possible data shown-->
+        <h1>Found {{ result }} search results for "{{ searchTerm }}"</h1>
+        <!--Unique item loop-->
+        {% if result %}    
+            {% for product in items['json_agg'] %}
+            <div style="border: 1px solid black;">
+                <div style="width: 100%; display: flex;">
+                    <div style="width: 50%; float: left; background-color: #fada5e;">
+                        <ul >
+                            <li><b>Brand:</b> {{ product['Brand'] }}</li>
+                            <li><b>UPC:</b> {{ product['UPC'] }}</li>
+                            <li><b>Size:</b> {{ product['Size'] }}</li>
+                            <li><b>Storage Type:</b> {{ product['StorageType'] }}</li>
+                        </ul>
+                    </div>
+                    <div style="width: 50%; float: right; background-color: #fada5e;">
+                    {% if userid %}    
+                        <form action="", method="POST">
+                            <button name="submit_wishlist", value="{{ product['UPC'] }}">Add to Wishlist</button>
+                            <button name="submit_shoppinglist", value="{{ product['UPC'] }}">Add to Shopping List</button>
+                        </form>
+                    {% endif %}
+                    </div>
+                </div>
+            
+                <!--Display Pricing at each location-->        
+                <table>
+                    <tr>
+                        <th>Company</th>
+                        <th>Address</th>
+                        <th>Availabile</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for info in product['pricingdetails'] %}    
+                    <tr>
+                        <td> {{info['Name']}} </td>
+                        <td> {{info['Address']}} </td>
+                        <td> {{info['Availability']}} </td>
+                        <td> ${{info['Price']}} </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <br>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        <h1>Search for items by product description</h1>
+    {% endif %}
+{% endblock %}

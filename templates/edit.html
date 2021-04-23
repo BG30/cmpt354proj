@@ -1,0 +1,52 @@
+{% extends 'layout.html'%}
+{% block body %}
+  <h1> {{name}} Edit page
+    <div id = button>
+      <style>
+        #button {
+          width: 9em;
+          border: 3px solid gray;
+          background: lightgray;
+          float: right;
+          font-size: 12px;
+          padding: 1em
+        }
+        a:hover {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+      </style>
+      <a href="/dashboard/{{name}}/edit/delete/wishlist">Delete full list<i class="fa fa-home"></i></a>
+    </div>
+  </h1>
+  <hr>
+  <div>
+    {% for row in data%}
+    <div style="border: 1px solid black;">
+      <div style="width: 100%; display: flex;">
+        <div style="width: 50%; float: left; background-color: lightyellow;">
+          <ul >
+            <li><b>Brand:</b> {{row[0]}}</li>
+            <li><b>UPC:</b> {{row[1]}}</li>
+            <li><b>Size:</b>{{row[2]}}</li>
+            <li><b>Storage Type:</b>{{row[3]}}</li>
+            <li><b>Price:</b>{{row[4]}}</li>
+            <li><b>Company:</b>{{row[5]}}</li>
+            <li><b>Address:</b>{{row[6]}}</li>
+          </ul>
+        </div>
+        <br>
+        <div style = "background-color: lightyellow">
+          <div style="float: right; background-color: lightgray; width: 8em; border: 3px solid gray; height: 30px;">
+            <div>
+              <a href="/dashboard/{{id}}/{{row[1]}}/{{name}}/edit/deleteProduct">Delete Product</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    {% endfor%}
+  </div>
+{% endblock %}

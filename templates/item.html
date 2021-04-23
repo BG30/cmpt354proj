@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    {% if listype == 'shoppinglist' %}
+        <h1>Item {{ upc }} {{ message }} in {{ listype }}</h1>
+        <br>
+        <h1>Please continue browsing products on the site</h1>
+    {% elif listype == 'wishlist' %}
+        <!--given a wishlist-->
+        <form action="/item", method="POST">
+            <p>Select a wish list and a price to track the product: </p>
+            {% for member in wishlists %}
+                <input type="radio" id="wishlist_selection" name="wishlist_selection", value="{{ member[0] }}"> {{ member[1] }} </input><br>
+            {% endfor %}
+            <br>
+            <input style="background-color: lightgray; width: 50%;", type="text", placeholder="Enter a desired price for item", name="pricebar", id="pricebar">
+            <button type="submit", value="submit", name="submit_list">Add</button>
+        </form>
+    {% else %}
+        <h1>item {{ wishmessage }}, please continue to browse the products</h1>
+    {% endif %}
+{% endblock %}

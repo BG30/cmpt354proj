@@ -1,0 +1,39 @@
+{% extends 'layout.html'%}
+{% block body %}
+  <h1> {{name}} List </h1>
+  <hr>
+  <div>
+    {% for row in data%}
+      <div style="border: 1px solid black;">
+        <div style="width: 100%; display: flex;">
+          <div style="width: 100%; float: left; background-color: lightyellow;">
+            <ul >
+              <li><b>Brand:</b> {{row[0]}}</li>
+              <li><b>UPC:</b> {{row[1]}}</li>
+              <li><b>Size:</b>{{row[2]}}</li>
+              <li><b>Storage Type:</b>{{row[3]}}</li>
+              <li><b>Price:</b>{{row[4]}}</li>
+              <li><b>Company:</b>{{row[5]}}</li>
+              <li><b>Address:</b>{{row[6]}}</li>
+            </ul>
+          </div>
+          <br>
+        </div>
+      </div>
+    <br>
+
+    {%endfor%}
+    <br>
+    <div id = button>
+      <style>
+        #button{
+          width: 4em;
+          border: 3px solid gray;
+          background: lightgray;
+          float: right;
+        }
+      </style>
+      <a href="/dashboard/{{id}}/{{name}}/edit"> Edit List</a>
+    </div>
+  </div>
+{% endblock %}

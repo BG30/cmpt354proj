@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block body %}
+  <h1>Add New Wish List</h1>
+  <form method="POST" action="">
+    <div class="form-group">
+     Name: <input type=" text" name="name" class="form-control" value="{{request.form.name}}">
+    </div>
+    <button type = "submit" class="btn btn-primary ">Submit</button>
+  </form>
+{% endblock %}

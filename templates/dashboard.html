@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block body %}
+  <h1> <small> Welcome {{session.username}}</small></h1>
+  <h1> <small> {{session.username}}'s List</small></h1>
+  <h3>Shopping List</h3>
+  <!-- Trying to make table for shopping List-->
+  <div id= list; style="height:100px;overflow:auto;">
+    <ul>
+      {% for row in value1 %}
+      <li class="shopping-list-group-item">
+        <a href =dashboard/{{row[1]}}/{{row[0]}}/>{{row[0]}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <h3>Wish List
+    <div id = button>
+      <style>
+        #button {
+          width: 3em;
+          border: 3px solid gray;
+          background: lightgray;
+          font-size: 20px;
+          padding-left: 1em;
+          float: right;
+        }
+        a:hover {
+          color: black;
+          background-color: transparent;
+          text-decoration: none;
+        }
+      </style>
+      <a href="/addNewList">+</a>
+    </div>
+  </h3>
+  <!-- Trying to make table for shopping List-->
+  <div id= wishlist; style="height:100px;overflow:auto;">
+    <ul>
+      {% for row1 in value2 %}
+      <li class="wish-list-group-item">
+        <a href =dashboard/wishlist/{{row1[1]}}/{{row1[0]}}> {{row1[0]}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
